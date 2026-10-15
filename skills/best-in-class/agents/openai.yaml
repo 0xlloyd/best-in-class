@@ -1,0 +1,4 @@
+interface:
+  display_name: "Best in Class"
+  short_description: "Research standards, improve work, retain knowledge"
+  default_prompt: "Use $best-in-class to research the right standard for this task, apply it, and retain sourced knowledge."

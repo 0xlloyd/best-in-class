@@ -1,0 +1,9 @@
+# Keep task-specific knowledge and local evaluation outputs private.
+best-in-class-knowledge/
+local-knowledge/
+evals/runs/
+.env
+.env.*
+__pycache__/
+*.pyc
+.DS_Store
