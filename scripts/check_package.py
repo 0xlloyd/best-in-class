@@ -25,6 +25,10 @@ else:
         errors.append("Description must be 1–1024 characters")
     if set(fields) != {"name", "description"}:
         errors.append("This core intentionally uses only name and description")
+expected_files = {"SKILL.md", "agents/openai.yaml"}
+actual_files = {p.relative_to(SKILL).as_posix() for p in SKILL.rglob("*") if p.is_file()}
+if actual_files != expected_files:
+    errors.append("Skill package must contain only SKILL.md and agents/openai.yaml")
 if len(text.splitlines()) >= 500:
     errors.append("Keep core instructions below 500 lines")
 for md in ROOT.rglob("*.md"):
@@ -37,7 +41,7 @@ for md in ROOT.rglob("*.md"):
         target = target.split("#", 1)[0]
         if target and not (md.parent / target).exists():
             errors.append(f"Broken local link in {md.relative_to(ROOT)}: {target}")
-for required in ["README.md", "LICENSE", "CONTRIBUTING.md", "docs/compatibility.md", "evals/RESULTS.md"]:
+for required in ["README.md", "LICENSE", "evals/RESULTS.md", "evals/scenarios.md"]:
     if not (ROOT / required).is_file():
         errors.append("Missing " + required)
 if errors:
